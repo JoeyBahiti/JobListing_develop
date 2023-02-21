@@ -1,0 +1,6 @@
+.wrapper {
+    height: 350px;
+  }
+  table.mat-table.cdk-table {
+    width: 100%;
+}

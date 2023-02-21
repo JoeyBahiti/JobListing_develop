@@ -1,0 +1,57 @@
+<div class="add-title">
+    <mat-card-title *ngIf="logged_user == 'job offers'">{{ data.id ? 'Modify job' : 'Add a new job' }}</mat-card-title>
+    <mat-card-title *ngIf="logged_user == 'job seekers'">Job details</mat-card-title>
+</div>
+
+<form [formGroup]="jobForm" (ngSubmit)="saveJob()">
+    <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+        <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field appearance="outline">
+                    <mat-label class="change">Title</mat-label>
+                    <input matInput placeholder="Title" formControlName="title">
+                    <mat-error *ngIf="jobForm.get('title')!.invalid && jobForm.get('title')!.touched">
+                        Please enter a title
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label class="change">Location</mat-label>
+                    <input matInput placeholder="Location" formControlName="location">
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label class="change">Salary</mat-label>
+                    <input matInput placeholder="Salary" formControlName="salary">
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="text-inside">
+                <mat-form-field appearance="outline">
+                    <mat-label class="change">Description</mat-label>
+                    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                    <mat-error *ngIf="jobForm.get('description')!.invalid && jobForm.get('description')!.touched">
+                        Please enter a description
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="d-inline" *ngIf="logged_user == 'job offers'">
+        <button mat-raised-button color="primary" type="submit">
+            {{ data.id ? 'Update' : 'Save' }}
+        </button>
+        <button mat-raised-button color="secondary" type="button" (click)="onNoClick()" *ngIf="data.id">Cancel</button>
+    </div>
+</form>

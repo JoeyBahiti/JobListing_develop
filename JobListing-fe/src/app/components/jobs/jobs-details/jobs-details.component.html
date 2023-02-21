@@ -1,0 +1,20 @@
+<div class="add-title">
+    <h2 class="primary">Job Details</h2>
+</div>
+<form [formGroup]="jobDetailsForm">
+    <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="85px" (window:resize)="onResize($event)">
+        <ng-container *ngFor="let formControl of ['title', 'location', 'author', 'salary', 'description']">
+            <mat-grid-tile>
+                <div class="text-inside">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="change">
+                            {{ formControl | titlecase }}
+                        </mat-label>
+                        <input matInput placeholder="{{ formControl | titlecase }}" formControlName="{{ formControl }}"
+                            readonly>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+        </ng-container>
+    </mat-grid-list>
+</form>
