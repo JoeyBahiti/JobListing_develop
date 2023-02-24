@@ -44,7 +44,7 @@
   <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" style="padding: 2%;">
 
     <div fxFlex="50%" fxFlex.sm="95%" fxFlex.xs="95%">
-      <h2>Job Applications</h2>
+      <h2>My job applications</h2>
       <table mat-table [dataSource]="dataSource1">
 
         <ng-container matColumnDef="title">
@@ -77,13 +77,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 25, 100]" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginator [pageSizeOptions]="[3, 10, 15]" showFirstLastButtons></mat-paginator>
     </div>
     <div fxFlex="5%">
 
     </div>
     <div fxFlex="50%" fxFlex.sm="95%" fxFlex.xs="95%">
-      <h2>Favorite Jobs</h2>
+      <h2>My favorite jobs</h2>
       <table mat-table [dataSource]="dataSource2">
 
         <ng-container matColumnDef="title">
@@ -120,7 +120,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 25, 100]" showFirstLastButtons></mat-paginator>
+      <!-- <mat-paginator [pageSizeOptions]="[5, 25, 100]" showFirstLastButtons></mat-paginator> -->
+      <mat-paginator #paginatorPageSize [pageSizeOptions]="pageSizes" showFirstLastButtons></mat-paginator>
+
+
     </div>
   </div>
 </mat-card>

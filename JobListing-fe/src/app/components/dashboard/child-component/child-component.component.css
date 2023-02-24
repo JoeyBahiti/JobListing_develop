@@ -1,0 +1,25 @@
+h2 {
+    margin-top: 0;
+  }
+  
+  div {
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 24px;
+    font-family: 'lato';
+  }
+  
+  input {
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    outline: none;
+  }
+  
+  button {
+    border: 1px solid black;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }

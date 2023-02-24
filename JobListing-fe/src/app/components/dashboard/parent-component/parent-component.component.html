@@ -1,0 +1,8 @@
+<div>
+    <h2>Parent </h2>
+
+    New jo received from child component : <h4>{{valueFromChild}}</h4>
+
+
+    <app-child-component (sendChildValue)="valueFromChild = $event" [data]="'test'"></app-child-component>
+</div>

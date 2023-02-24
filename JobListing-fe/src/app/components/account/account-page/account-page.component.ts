@@ -12,11 +12,13 @@ import { JobsCreateComponent } from '../../jobs/jobs-create/jobs-create.componen
   templateUrl: './account-page.component.html',
   styleUrls: ['./account-page.component.css']
 })
-export class AccountPageComponent implements OnInit, AfterViewInit {
+export class AccountPageComponent implements OnInit {
 
   dataSource1 = new MatTableDataSource([]);
   dataSource2 = new MatTableDataSource([]);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
 
   displayedColumns: string[] = ['title', 'description', 'location', 'salary', 'action'];
   displayedColumns2: string[] = ['title', 'description', 'location', 'salary', 'action'];
@@ -24,7 +26,7 @@ export class AccountPageComponent implements OnInit, AfterViewInit {
   favoriteJobsList: any;
   logged_user: any | null;
   userDetails: any;
-
+  idOfUser: any;
   constructor(
     private titleService: Title,
     public jobService: JobsService,
@@ -34,27 +36,23 @@ export class AccountPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle('Profile');
-    this.getJobApplications();
-    this.getListOfFavoriteJobs();
+
     let authToken = window.localStorage.getItem('role');
+    this.idOfUser = localStorage.getItem('id');
     this.logged_user = authToken;
     this.getUserDetails();
+    this.getJobApplications();
+    this.getListOfFavoriteJobs();
   }
 
-  ngAfterViewInit() {
-    this.dataSource1.paginator = this.paginator;
-    this.dataSource2.paginator = this.paginator;
-  }
-
-
+  pageSizes = [3, 5, 7];
   getUserDetails() {
-    this.authService.getUserDetails().subscribe(data => {
+    this.authService.getUserById(this.idOfUser).subscribe(data => {
       this.userDetails = data.data;
-      console.log(this.userDetails)
     })
   }
   getJobApplications() {
-    this.jobService.getAppliedJobs().subscribe(data => {
+    this.jobService.getAppliedJobs(this.idOfUser).subscribe(data => {
       this.appliedJobsList = data;
       this.dataSource1.data = this.appliedJobsList.data;
       this.dataSource1.data.length = this.appliedJobsList.data.length; this.dataSource1.paginator = this.paginator;
@@ -62,15 +60,15 @@ export class AccountPageComponent implements OnInit, AfterViewInit {
   }
 
   getListOfFavoriteJobs() {
-    this.jobService.getFavoriteJobs().subscribe(data => {
+    this.jobService.getFavoriteJobs(this.idOfUser).subscribe(data => {
       this.favoriteJobsList = data;
       this.dataSource2.data = this.favoriteJobsList.data;
-      this.dataSource2.data.length = this.favoriteJobsList.data.length; this.dataSource2.paginator = this.paginator;
+
+      this.dataSource2.data.length = this.favoriteJobsList.data.length; this.dataSource2.paginator = this.paginatorPageSize;
     });
   }
 
   startEdit(details: any | null): void {
-    console.log(details)
     let dialogRef = this.dialog.open(JobsCreateComponent, {
       width: "800px",
       height: "600px",

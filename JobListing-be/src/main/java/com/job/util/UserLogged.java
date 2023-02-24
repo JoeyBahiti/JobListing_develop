@@ -1,5 +1,7 @@
 package com.job.util;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,12 @@ public class UserLogged {
 		 
 		return user;
 		
+	}
+
+	public User findById(long id) {
+		// TODO Auto-generated method stub
+		User user = userRepository.findById(id).get();
+		return user;
 	}
 
 }

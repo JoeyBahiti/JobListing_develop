@@ -9,7 +9,9 @@
             <div class="text-inside">
                 <mat-form-field appearance="outline">
                     <mat-label class="change">Title</mat-label>
-                    <input matInput placeholder="Title" formControlName="title">
+                    <input matInput placeholder="Title" formControlName="title" *ngIf="logged_user == 'job offers'">
+                    <input matInput placeholder="Title" formControlName="title" *ngIf="logged_user == 'job seekers'"
+                        readonly>
                     <mat-error *ngIf="jobForm.get('title')!.invalid && jobForm.get('title')!.touched">
                         Please enter a title
                     </mat-error>
@@ -21,7 +23,10 @@
             <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label class="change">Location</mat-label>
-                    <input matInput placeholder="Location" formControlName="location">
+                    <input matInput placeholder="Location" formControlName="location"
+                        *ngIf="logged_user == 'job offers'">
+                    <input matInput placeholder="Location" formControlName="location"
+                        *ngIf="logged_user == 'job seekers'" readonly>
                 </mat-form-field>
             </div>
         </mat-grid-tile>
@@ -30,16 +35,21 @@
             <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label class="change">Salary</mat-label>
-                    <input matInput placeholder="Salary" formControlName="salary">
+                    <input matInput placeholder="Salary" formControlName="salary" *ngIf="logged_user == 'job offers'">
+                    <input matInput placeholder="Salary" formControlName="salary" *ngIf="logged_user == 'job seekers'"
+                        readonly>
                 </mat-form-field>
             </div>
         </mat-grid-tile>
 
         <mat-grid-tile>
             <div class="text-inside">
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" style="margin-top: 10px!important;">
                     <mat-label class="change">Description</mat-label>
-                    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                    <textarea matInput placeholder="Description" formControlName="description"
+                        *ngIf="logged_user == 'job offers'"></textarea>
+                    <textarea matInput placeholder="Description" formControlName="description"
+                        *ngIf="logged_user == 'job seekers'" readonly></textarea>
                     <mat-error *ngIf="jobForm.get('description')!.invalid && jobForm.get('description')!.touched">
                         Please enter a description
                     </mat-error>

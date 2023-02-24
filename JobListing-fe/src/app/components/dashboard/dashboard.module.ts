@@ -12,9 +12,11 @@ import { TableVirtualScrollModule } from 'ng-table-virtual-scroll';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatTableModule } from '@angular/material/table';
+import { ParentComponentComponent } from './parent-component/parent-component.component';
+import { ChildComponentComponent } from './child-component/child-component.component';
 
 @NgModule({
-    declarations: [DashboardHomeComponent, VirtualScrollComponent],
+    declarations: [DashboardHomeComponent, VirtualScrollComponent, ParentComponentComponent, ChildComponentComponent],
     imports: [
 
         CommonModule,

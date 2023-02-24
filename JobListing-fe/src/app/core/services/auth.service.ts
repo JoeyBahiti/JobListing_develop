@@ -21,6 +21,9 @@ export class AuthenticationService {
         const authToken = window.localStorage.getItem('token');
         this.headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     }
+    getUserById(id: number): Observable<any> {
+        return this.http.get(`${this.baseUrl}/user/id?id=${id}`, { headers: this.headers });
+    }
     proceedLogin(body: any) {
         return this.http.post(`${this.baseUrl}/signin`, body)
     }
@@ -52,4 +55,6 @@ export class AuthenticationService {
     getUserDetails(): Observable<any> {
         return this.http.get(`${this.baseUrl}/user/details`, { headers: this.headers });
     }
+
+
 }

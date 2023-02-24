@@ -32,7 +32,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SelectCheckAllComponent } from './select-check-all/select-check-all.component';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
@@ -68,7 +68,7 @@ export const MY_FORMATS = {
     MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, SelectCheckAllComponent, DragDropModule, MatSortModule
+    MatExpansionModule, DragDropModule, MatSortModule
   ],
   providers: [
     {
@@ -77,7 +77,7 @@ export const MY_FORMATS = {
     },
     { provide: LOCALE_ID, useValue: 'en-gb' }
   ],
-  declarations: [SelectCheckAllComponent]
+  declarations: []
 })
 export class CustomMaterialModule {
   static forRoot() {

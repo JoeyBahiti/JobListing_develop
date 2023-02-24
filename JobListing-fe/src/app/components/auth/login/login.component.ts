@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
         this.authenticationService.proceedLogin(this.loginForm.value).subscribe(
             (data: any) => {
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('role', data.roles[0]);
                 localStorage.setItem('id', data.id);
+                localStorage.setItem('role', data.roles[0]);
                 this.router.navigate(['/']);
             },
             error => {

@@ -24,9 +24,9 @@ public interface JobsRepository extends JpaRepository<Jobs, Integer> {
 			+ " AND (?3 IS NULL OR j.user.id= ?3) ")
 	List<Jobs> searchJobs(Integer id, String title, Integer author);
 
-	@Query(value = "Select j From Jobs j inner join UserJobs uj on j.id = uj.job.id where uj.favorite = 1 and uj.applied = 0")
+	@Query(value = "Select j From Jobs j inner join UserJobs uj on j.id = uj.job.id where uj.favorite = 1 and uj.applied = 0 and uj.user.id = ?1")
 	List<Jobs> findFavoriteOfUser(Long id);
 
-	@Query(value = "Select j From Jobs j inner join UserJobs uj on j.id = uj.job.id where uj.applied = 1")
+	@Query(value = "Select j From Jobs j inner join UserJobs uj on j.id = uj.job.id where uj.applied = 1 and uj.user.id = ?1")
 	List<Jobs> findAppliedOfUser(Long id);
 }

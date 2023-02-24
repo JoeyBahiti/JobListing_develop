@@ -56,13 +56,11 @@ export class DashboardHomeComponent implements OnInit {
       this.notificationService.openSnackBar('Welcome!');
     });
     this.getFilteredJobs();
-    console.log(this.logged_user)
   }
 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue)
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -70,28 +68,23 @@ export class DashboardHomeComponent implements OnInit {
   }
   getFilteredJobs() {
     const isJobSeeker = this.logged_user === 'job seekers';
-    const filterOptions: Record<string, any> = { page: 0, pageSize: 10 };
-    if (!isJobSeeker) {
-      filterOptions['userId'] = this.userId;
-    }
-    this.jobService.getFilteredJobs(false, 0, 10, this.userId).subscribe((data) => {
+    const isJobOffers = this.logged_user === 'job offers';
+    const filterOptions: Record<string, any> = { page: 0, pageSize: 10, userId: isJobOffers ? this.userId : undefined };
+
+    this.jobService.getFilteredJobs(false, 0, 10, filterOptions['userId']).subscribe(data => {
       this.jobList = data;
-      console.log(data);
-      const jobListContent = isJobSeeker ? this.jobList?.data.content : this.jobList?.data.content;
-      const tempData: any[] = [];
-      jobListContent.forEach((element: any) => {
-        tempData.push({
-          id: element.job.id,
-          favorite: element.favorite,
-          title: element.job.title,
-          description: element.job.description,
-          salary: element.job.salary,
-          location: element.job.location
-        })
-      });
+      const jobListContent = this.jobList?.data.content || [];
+      const tempData = jobListContent.map((element: any) => ({
+        id: element.job.id,
+        favorite: element.favorite,
+        title: element.job.title,
+        description: element.job.description,
+        salary: element.job.salary,
+        location: element.job.location
+      }));
       this.dataSource = new MatTableDataSource(tempData);
-      this.dataSource.data.length = tempData.length; this.dataSource.paginator = this.paginator;
-      console.log(this.jobList);
+      this.dataSource.data.length = tempData.length;
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -110,11 +103,9 @@ export class DashboardHomeComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-
           this.getFilteredJobs();
           this.notificationService.openSnackBar('Job was deleted successfully!')
         },
-
         error: (error) => {
           this.notificationService.openSnackBar(error.error.message);
         },
@@ -122,17 +113,12 @@ export class DashboardHomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.getFilteredJobs();;
     });
-
-
-
-
   }
 
   startEdit(details: any | null): void {
-    console.log(details)
     let dialogRef = this.dialog.open(JobsCreateComponent, {
       width: "800px",
-      height: "600px",
+      height: "500px",
       data: {
         id: details?.id,
         title: details?.title,
@@ -150,10 +136,11 @@ export class DashboardHomeComponent implements OnInit {
     return this.starType;
   }
   toggleFavorite(item: any): void {
-    console.log('item', item)
     this.starType = 'star';
     this.jobService.makeJobFavorite(item.id).subscribe(data => {
       this.getFilteredJobs();
+      this.notificationService.openSnackBar('This job is now selected as favourite !')
+
     })
 
   }

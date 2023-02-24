@@ -31,12 +31,12 @@ export class JobsService {
         return this.http.get(`${this.baseUrl}/action/all/jobs`, { headers: this.headers, params });
     }
 
-    getAppliedJobs(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/action/job/get/applied`, { headers: this.headers });
+    getAppliedJobs(id: number): Observable<any> {
+        return this.http.get(`${this.baseUrl}/action/job/get/applied?id=${id}`, { headers: this.headers });
     }
 
-    getFavoriteJobs(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/action/job/get/favorite`, { headers: this.headers });
+    getFavoriteJobs(id: number): Observable<any> {
+        return this.http.get(`${this.baseUrl}/action/job/get/favorite?id=${id}`, { headers: this.headers });
     }
 
     getJobDetails(id: number): Observable<any> {

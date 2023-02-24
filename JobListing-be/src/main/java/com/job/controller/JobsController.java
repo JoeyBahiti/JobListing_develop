@@ -189,22 +189,23 @@ public class JobsController {
 		
     }
 	
+
 	
 	@GetMapping("/job/get/favorite")
-    public ResponseEntity<Object> favoriteJobs() {
+    public ResponseEntity<Object> favoriteJobs(@RequestParam(name = "id") long id)throws Exception {
 		
-		User user = userLogged.getUserLogged();
-		List<Jobs> listJob = jobsRepository.findFavoriteOfUser(user.getId());
+		//User user = userLogged.getUserLogged();
+		List<Jobs> listJob = jobsRepository.findFavoriteOfUser(id);
 		
 		return ResponseHandler.generateResponse("OK", HttpStatus.OK, listJob);
     }
 
 	
 	@GetMapping("/job/get/applied")
-    public ResponseEntity<Object> appliedJobs() {
+    public ResponseEntity<Object> appliedJobs(@RequestParam(name = "id") long id)throws Exception {
 		
-		User user = userLogged.getUserLogged();
-		List<Jobs> listJob = jobsRepository.findAppliedOfUser(user.getId());
+		//User user = userLogged.getUserLogged();
+		List<Jobs> listJob = jobsRepository.findAppliedOfUser(id);
 		
 		return ResponseHandler.generateResponse("OK", HttpStatus.OK, listJob);
     }

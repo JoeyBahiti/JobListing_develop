@@ -40,18 +40,16 @@ export class LayoutComponent implements OnInit {
 
     ngOnInit(): void {
         let authToken = window.localStorage.getItem('role');
-        this.id = window.localStorage.getItem('id');
+        this.id = localStorage.getItem('id');
         this.logged_user = authToken;
+        this.authService.getUserById(this.id).subscribe(data => {
+            this.personalData = data.data;
+        })
         const user = this.authService.getCurrentUser();
         const timer$ = timer(2000, 5000);
 
-
-        this.authService.getUserDetails().subscribe(data => {
-            this.personalData = data.data;
-            console.log('ooooooooooo', this.personalData)
-        })
-
     }
+
 
 
 }

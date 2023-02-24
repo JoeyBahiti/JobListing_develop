@@ -42,7 +42,6 @@ export class VirtualScrollComponent implements OnInit {
     }
     this.jobService.getFilteredJobs(false, 0, 10, this.userId).subscribe((data) => {
       this.jobList = data;
-      console.log(data);
       const jobListContent = isJobSeeker ? this.jobList?.data.content : this.jobList?.data.content;
       const tempData: any[] = [];
       jobListContent.forEach((element: any) => {
@@ -56,7 +55,6 @@ export class VirtualScrollComponent implements OnInit {
         })
       });
       this.dataSource = new TableVirtualScrollDataSource(tempData);
-      console.log(this.jobList);
     });
   }
 }

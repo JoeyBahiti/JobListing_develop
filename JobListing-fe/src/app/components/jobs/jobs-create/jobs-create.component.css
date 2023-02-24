@@ -47,4 +47,10 @@ mat-form-field {
       margin-right: 1rem !important;
     }
   }
-  
+  button.mat-focus-indicator.mat-raised-button.mat-button-base.mat-primary {
+    margin-right: 15px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin-top: 33px;
+}

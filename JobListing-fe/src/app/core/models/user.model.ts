@@ -4,6 +4,6 @@ export class User {
     id!: number;
     username!: string;
     email!: string;
-    paswword!: string;
+    password!: string;
     role!: Role;
 }

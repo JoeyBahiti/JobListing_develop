@@ -122,7 +122,14 @@ public class AuthController {
 		User user = userLogged.getUserLogged();
 		return ResponseHandler.generateResponse("OK", HttpStatus.OK, user);
 
+    }
+	
+	@GetMapping("/user/id")
+    public ResponseEntity<Object> getUserById(@RequestParam(name = "id") long id) throws Exception {
 		
+		User user = userLogged.findById(id);
+		return ResponseHandler.generateResponse("OK", HttpStatus.OK, user);
+
     }
 	
 }

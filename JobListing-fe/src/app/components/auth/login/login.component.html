@@ -21,7 +21,7 @@
                     *ngIf="registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)">
                     <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</div>
                 </div>
-                <button (click)="registerUser()">Sign up</button>
+                <button (click)="registerUser()" [disabled]="!registerForm.valid">Sign up</button>
             </form>
         </div>
 
